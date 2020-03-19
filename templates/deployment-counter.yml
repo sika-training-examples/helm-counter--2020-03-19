@@ -11,7 +11,7 @@ spec:
       release: {{ .Release.Name }}
       project: counter
       app: counter
-  replicas: 2
+  replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
