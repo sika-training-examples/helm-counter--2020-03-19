@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-counter
+  labels:
+    project: counter
+    release: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      release: {{ .Release.Name }}
+      project: counter
+      app: counter
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        release: {{ .Release.Name }}
+        project: counter
+        app: counter
+    spec:
+      containers:
+      - name: counter
+        image: ondrejsika/counter
+        resources:
+          requests:
+            cpu: 20m
+            memory: 10Mi
+        env:
+        - name: REDIS
+          value: {{ .Release.Name }}-redis
+        ports:
+        - containerPort: 80
