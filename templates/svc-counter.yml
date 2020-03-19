@@ -6,7 +6,7 @@ metadata:
     project: counter
     release: {{ .Release.Name }}
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - port: 80
   selector:
